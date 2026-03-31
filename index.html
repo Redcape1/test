@@ -61,6 +61,29 @@
   }
   .no-user-icon { font-size: 48px; }
   .no-user-text { font-family: 'Oxanium', sans-serif; color: var(--text-dim); font-size: 16px; }
+  .search-box {
+    margin-top: 16px; display: flex; gap: 8px;
+  }
+  .search-input {
+    background: #1a2236; border: 1px solid #1e3a5f; color: #e2e8f0;
+    padding: 10px 16px; border-radius: 8px; font-family: 'Oxanium', sans-serif;
+    font-size: 16px; width: 200px; outline: none;
+  }
+  .search-input:focus { border-color: var(--accent-cyan); box-shadow: 0 0 8px rgba(6,182,212,0.2); }
+  .search-btn {
+    background: var(--accent-blue); color: white; border: none;
+    padding: 10px 20px; border-radius: 8px; font-family: 'Oxanium', sans-serif;
+    font-size: 14px; cursor: pointer; letter-spacing: 1px; text-transform: uppercase;
+  }
+  .search-btn:hover { background: #2563eb; }
+  .back-btn {
+    position: fixed; top: 16px; left: 16px; background: var(--bg-section);
+    border: 1px solid var(--border); color: var(--text-secondary); padding: 8px 16px;
+    border-radius: 8px; font-family: 'Oxanium', sans-serif; font-size: 12px;
+    cursor: pointer; letter-spacing: 1px; text-transform: uppercase; z-index: 100;
+    display: none;
+  }
+  .back-btn:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
   .header {
     background: linear-gradient(135deg, #0f1a2e 0%, #1a1040 50%, #0f1a2e 100%);
     border: 1px solid var(--border); border-radius: 12px;
@@ -196,6 +219,7 @@
 </style>
 </head>
 <body>
+<button class="back-btn" id="backBtn" onclick="goBack()">← New Search</button>
 <div class="profile-container" id="app">
   <div class="loading-screen" id="loading">
     <div class="loading-spinner"></div>
@@ -203,7 +227,11 @@
   </div>
   <div class="no-user" id="no-user" style="display:none">
     <div class="no-user-icon">👤</div>
-    <div class="no-user-text">Select a user from the dashboard</div>
+    <div class="no-user-text" id="noUserText">Enter a User ID</div>
+    <div class="search-box">
+      <input id="searchInput" type="text" class="search-input" placeholder="User ID...">
+      <button onclick="loadUser()" class="search-btn">Load</button>
+    </div>
   </div>
   <div id="profile-content" style="display:none">
     <div class="header">
@@ -241,25 +269,53 @@
   </div>
 </div>
 <script>
-const WORKER_URL = 'https://summer-cake-3a94.emrence.workers.dev';
-
-const SAMPLE_DATA = {};
+var WORKER_URL = 'https://summer-cake-3a94.emrence.workers.dev';
 
 function getUserIdFromUrl() {
   return new URLSearchParams(window.location.search).get('user_id');
 }
 
+function loadUser() {
+  var id = document.getElementById('searchInput').value.trim();
+  if (id) {
+    var url = new URL(window.location);
+    url.searchParams.set('user_id', id);
+    window.history.replaceState({}, '', url);
+    document.getElementById('no-user').style.display = 'none';
+    document.getElementById('loading').style.display = 'flex';
+    document.getElementById('profile-content').style.display = 'none';
+    init();
+  }
+}
+
+function goBack() {
+  document.getElementById('profile-content').style.display = 'none';
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('backBtn').style.display = 'none';
+  document.getElementById('no-user').style.display = 'flex';
+  document.getElementById('noUserText').textContent = 'Enter a User ID';
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchInput').focus();
+  var url = new URL(window.location);
+  url.searchParams.delete('user_id');
+  window.history.replaceState({}, '', url);
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && document.activeElement.id === 'searchInput') loadUser();
+});
+
 async function fetchUserData(userId) {
   try {
-    const resp = await fetch(WORKER_URL + '?user_id=' + userId);
+    var resp = await fetch(WORKER_URL + '?user_id=' + userId);
     if (resp.ok) {
-      const data = await resp.json();
+      var data = await resp.json();
       if (!data.error) return data;
     }
   } catch(e) {
     console.warn('API failed:', e);
   }
-  return SAMPLE_DATA[userId] || null;
+  return null;
 }
 
 function formatCurrency(val) {
@@ -278,23 +334,23 @@ function getValueClass(pct) {
 }
 
 function getBadgeClass(value) {
-  const v = (value || '').toLowerCase();
-  if (['platinum', 'high value', 'diamond', 'platinium'].includes(v)) return 'badge-platinum';
-  if (['gold'].includes(v)) return 'badge-gold';
-  if (['black'].includes(v)) return 'badge-black';
-  if (['iron'].includes(v)) return 'badge-iron';
-  if (['bronze'].includes(v)) return 'badge-bronze';
-  if (['copper', 'tier 2'].includes(v)) return 'badge-copper';
-  if (['steel'].includes(v)) return 'badge-steel';
-  if (['recently active', 'active', 'loyal', 'positive', 'medium'].includes(v)) return 'badge-active';
-  if (['at risk', 'at-risk', 'declining', 'cooling off', 'high-risk'].includes(v)) return 'badge-warning';
-  if (['negative', 'churned', 'inactive', 'dormant'].includes(v)) return 'badge-danger';
+  var v = (value || '').toLowerCase();
+  if (['platinum', 'high value', 'diamond', 'platinium'].indexOf(v) >= 0) return 'badge-platinum';
+  if (v === 'gold') return 'badge-gold';
+  if (v === 'black') return 'badge-black';
+  if (v === 'iron') return 'badge-iron';
+  if (v === 'bronze') return 'badge-bronze';
+  if (v === 'copper' || v === 'tier 2') return 'badge-copper';
+  if (v === 'steel') return 'badge-steel';
+  if (['recently active', 'active', 'loyal', 'positive', 'medium'].indexOf(v) >= 0) return 'badge-active';
+  if (['at risk', 'at-risk', 'declining', 'cooling off', 'high-risk'].indexOf(v) >= 0) return 'badge-warning';
+  if (['negative', 'churned', 'inactive', 'dormant'].indexOf(v) >= 0) return 'badge-danger';
   return 'badge-none';
 }
 
 function getBorderColor(value) {
-  const cls = getBadgeClass(value);
-  const map = {
+  var cls = getBadgeClass(value);
+  var map = {
     'badge-platinum': 'var(--platinum)', 'badge-gold': 'var(--gold)', 'badge-black': '#e2e8f0',
     'badge-iron': 'var(--text-secondary)', 'badge-bronze': '#f59e0b', 'badge-copper': 'var(--accent-orange)',
     'badge-steel': '#94a3b8', 'badge-active': 'var(--accent-green)', 'badge-warning': 'var(--accent-yellow)',
@@ -304,8 +360,8 @@ function getBorderColor(value) {
 }
 
 function calcOverallScore(data) {
-  let score = 50;
-  const loy = (data.segments.loyalty || '').toLowerCase();
+  var score = 50;
+  var loy = (data.segments.loyalty || '').toLowerCase();
   if (loy === 'black' || loy === 'diamond') score += 20;
   else if (loy === 'platinum' || loy === 'platinium') score += 15;
   else if (loy === 'gold') score += 10;
@@ -320,7 +376,7 @@ function calcOverallScore(data) {
 }
 
 function statRow(label, value, pct) {
-  const cls = getValueClass(pct);
+  var cls = getValueClass(pct);
   return '<div class="stat-row"><span class="stat-label">' + label + '</span><span class="stat-value val-' + cls + '">' + value + '</span><div class="stat-bar-container"><div class="stat-bar bar-' + cls + '" style="width:' + pct + '%"></div></div></div>';
 }
 
@@ -331,12 +387,13 @@ function segmentItem(name, value) {
 function renderProfile(d) {
   document.getElementById('loading').style.display = 'none';
   document.getElementById('profile-content').style.display = 'block';
+  document.getElementById('backBtn').style.display = 'block';
   var score = calcOverallScore(d);
   var initials = ('U' + d.user_id.slice(-2)).toUpperCase();
   document.getElementById('avatar').textContent = initials;
   document.getElementById('userName').textContent = 'USER ' + d.user_id;
-  document.getElementById('userIdText').textContent = 'ID: ' + d.user_id + ' · Signup: ' + d.signup_date;
-  document.getElementById('vipBadge').textContent = '⬥ ' + d.vip_level;
+  document.getElementById('userIdText').textContent = 'ID: ' + d.user_id + ' \u00b7 Signup: ' + d.signup_date;
+  document.getElementById('vipBadge').textContent = '\u2b25 ' + d.vip_level;
   document.getElementById('overallScore').textContent = score;
   document.getElementById('userMeta').innerHTML = '<div class="meta-item"><span class="meta-dot" style="background:var(--accent-green)"></span> ' + d.status + '</div><div class="meta-item"><span class="meta-dot" style="background:var(--accent-purple)"></span> ' + d.vip_level + '</div><div class="meta-item"><span class="meta-dot" style="background:var(--accent-cyan)"></span> ' + d.days_active + ' days active</div>';
   var seg = d.segments;
@@ -351,13 +408,13 @@ function renderProfile(d) {
   var currentIdx = stages.indexOf(d.lifecycle_stage);
   var lcHTML = '';
   stages.forEach(function(s, i) {
-    if (i > 0) lcHTML += '<div class="lc-arrow">→</div>';
+    if (i > 0) lcHTML += '<div class="lc-arrow">\u2192</div>';
     var cls = i < currentIdx ? 'completed' : (i === currentIdx ? 'active' : '');
-    var prefix = i < currentIdx ? '✓ ' : (i === currentIdx ? '◈ ' : '');
+    var prefix = i < currentIdx ? '\u2713 ' : (i === currentIdx ? '\u25c8 ' : '');
     lcHTML += '<div class="lc-stage ' + cls + '">' + prefix + stageLabels[s] + '</div>';
   });
   document.getElementById('lifecycleBar').innerHTML = lcHTML;
-  var riskIcons = { low: '✅', medium: '⚠', high: '🔴' };
+  var riskIcons = { low: '\u2705', medium: '\u26a0', high: '\ud83d\udd34' };
   var riskLabels = { low: 'Low Risk', medium: 'Medium Risk', high: 'High Risk' };
   document.getElementById('riskBanner').innerHTML = '<div class="risk-banner risk-' + d.risk_level + '"><div class="risk-icon">' + riskIcons[d.risk_level] + '</div><div class="risk-text"><div class="risk-label">' + riskLabels[d.risk_level] + '</div><div class="risk-desc">' + d.risk_description + '</div></div></div>';
 }
@@ -367,13 +424,17 @@ async function init() {
   if (!userId) {
     document.getElementById('loading').style.display = 'none';
     document.getElementById('no-user').style.display = 'flex';
+    document.getElementById('backBtn').style.display = 'none';
     return;
   }
+  document.getElementById('loading').style.display = 'flex';
+  document.getElementById('no-user').style.display = 'none';
   var data = await fetchUserData(userId);
   if (!data) {
     document.getElementById('loading').style.display = 'none';
     document.getElementById('no-user').style.display = 'flex';
-    document.querySelector('.no-user-text').textContent = 'User ' + userId + ' not found';
+    document.getElementById('noUserText').textContent = 'User ' + userId + ' not found';
+    document.getElementById('backBtn').style.display = 'block';
     return;
   }
   renderProfile(data);
