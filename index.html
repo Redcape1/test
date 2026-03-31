@@ -403,4 +403,92 @@ function statRow(label, value, pct, link) {
 }
 
 function segmentItem(name, value) {
-  return '<div class="segment-item" style="border-color:' + getBorderColor(value) + '"><span class="segment-name">'
+  return '<div class="segment-item" style="border-color:' + getBorderColor(value) + '"><span class="segment-name">' + name + '</span><span class="badge ' + getBadgeClass(value) + '">' + value + '</span></div>';
+}
+
+function renderProfile(d) {
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('profile-content').style.display = 'block';
+  document.getElementById('backBtn').style.display = 'block';
+  var score = calcOverallScore(d);
+  var initials = ('U' + d.user_id.slice(-2)).toUpperCase();
+  var volDrill = drillUrl('volume', d.user_id);
+  document.getElementById('avatar').textContent = initials;
+  document.getElementById('userName').textContent = 'USER ' + d.user_id;
+  document.getElementById('userIdText').textContent = 'ID: ' + d.user_id + ' \u00b7 Signup: ' + d.signup_date;
+  document.getElementById('vipBadge').textContent = '\u2b25 ' + d.vip_level;
+  document.getElementById('overallScore').textContent = score;
+  document.getElementById('userMeta').innerHTML = '<div class="meta-item"><span class="meta-dot" style="background:var(--accent-green)"></span> ' + d.status + '</div><div class="meta-item"><span class="meta-dot" style="background:var(--accent-purple)"></span> ' + d.vip_level + '</div><div class="meta-item"><span class="meta-dot" style="background:var(--accent-cyan)"></span> ' + d.days_active + ' days active</div>';
+  var seg = d.segments;
+  document.getElementById('segmentsGrid').innerHTML = segmentItem('Loyalty', seg.loyalty) + segmentItem('Loyalty v2', seg.loyalty_v2) + segmentItem('LTV', seg.ltv) + segmentItem('Transactional', seg.transactional) + segmentItem('Retention', seg.retention) + segmentItem('Fee Refund', seg.fee_refund) + segmentItem('PnL', seg.pnl);
+  var a = d.activity;
+  document.getElementById('activityBody').innerHTML =
+    statRow('Trade Count', a.trade_count_30d, Math.min(a.trade_count_30d / 1.2, 100)) +
+    statRow('Trade Volume', formatCurrency(a.trade_volume_30d), Math.min(a.trade_volume_30d / 15000, 100), volDrill) +
+    statRow('Login Inactivity', a.login_inactivity, a.login_inactivity === 'Recently Active' ? 95 : 30) +
+    statRow('Deposit Count', a.deposit_count, Math.min(a.deposit_count * 5, 100)) +
+    statRow('Bonus Trades', a.bonus_trades, Math.max(a.bonus_trades * 10, 5)) +
+    statRow('Last Login', a.last_login_hours + 'h ago', Math.max(100 - a.last_login_hours * 4, 5));
+  var f = d.financial;
+  document.getElementById('financialBody').innerHTML =
+    statRow('First Deposit', '$' + f.first_deposit, Math.min(f.first_deposit / 5, 100)) +
+    statRow('PnL (All Time)', formatCurrency(f.pnl_all_time), f.pnl_all_time > 0 ? Math.min(f.pnl_all_time / 50, 100) : Math.max(30 + f.pnl_all_time / 200, 5)) +
+    statRow('GGR Contribution', formatCurrency(f.ggr_contribution), f.ggr_contribution > 0 ? Math.min(f.ggr_contribution / 60, 100) : 10);
+  var volCard = '<div class="mini-card mc-blue"><div class="mini-label">Volume</div><div class="mini-value" style="color:var(--accent-blue)">' + formatCurrency(a.trade_volume_30d) + '</div><div class="mini-sub trend-flat">' + a.trade_count_30d + ' trades</div></div>';
+  if (volDrill) volCard = '<a href="' + volDrill + '" target="_blank" class="mini-link">' + volCard + '</a>';
+  document.getElementById('bottomRow').innerHTML =
+    volCard +
+    '<div class="mini-card mc-green"><div class="mini-label">PnL</div><div class="mini-value" style="color:' + (f.pnl_all_time >= 0 ? 'var(--accent-green)' : 'var(--accent-red)') + '">' + formatCurrency(f.pnl_all_time) + '</div><div class="mini-sub trend-flat">all time</div></div>' +
+    '<div class="mini-card mc-purple"><div class="mini-label">Loyalty</div><div class="mini-value" style="color:var(--accent-purple)">' + seg.loyalty + '</div><div class="mini-sub trend-flat">' + seg.loyalty_v2 + ' v2</div></div>' +
+    '<div class="mini-card mc-yellow"><div class="mini-label">LTV</div><div class="mini-value" style="color:var(--accent-yellow)">' + seg.ltv + '</div><div class="mini-sub trend-flat">segment</div></div>' +
+    '<div class="mini-card mc-red"><div class="mini-label">Status</div><div class="mini-value" style="color:var(--accent-cyan)">' + d.status + '</div><div class="mini-sub trend-flat">login activity</div></div>';
+  var stages = ['acquired', 'activated', 'retained', 'at_risk', 'churned'];
+  var stageLabels = { acquired: 'Acquired', activated: 'Activated', retained: 'Retained', at_risk: 'At Risk', churned: 'Churned' };
+  var currentIdx = stages.indexOf(d.lifecycle_stage);
+  var lcHTML = '';
+  stages.forEach(function(s, i) {
+    if (i > 0) lcHTML += '<div class="lc-arrow">\u2192</div>';
+    var cls = i < currentIdx ? 'completed' : (i === currentIdx ? 'active' : '');
+    var prefix = i < currentIdx ? '\u2713 ' : (i === currentIdx ? '\u25c8 ' : '');
+    lcHTML += '<div class="lc-stage ' + cls + '">' + prefix + stageLabels[s] + '</div>';
+  });
+  document.getElementById('lifecycleBar').innerHTML = lcHTML;
+  var riskIcons = { low: '\u2705', medium: '\u26a0', high: '\ud83d\udd34' };
+  var riskLabels = { low: 'Low Risk', medium: 'Medium Risk', high: 'High Risk' };
+  document.getElementById('riskBanner').innerHTML = '<div class="risk-banner risk-' + d.risk_level + '"><div class="risk-icon">' + riskIcons[d.risk_level] + '</div><div class="risk-text"><div class="risk-label">' + riskLabels[d.risk_level] + '</div><div class="risk-desc">' + d.risk_description + '</div></div></div>';
+}
+
+async function init() {
+  var userId = getUserIdFromUrl();
+  if (!userId) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('no-user').style.display = 'flex';
+    document.getElementById('backBtn').style.display = 'none';
+    return;
+  }
+  document.getElementById('loading').style.display = 'flex';
+  document.getElementById('no-user').style.display = 'none';
+  var data = await fetchUserData(userId);
+  if (!data) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('no-user').style.display = 'flex';
+    document.getElementById('noUserText').textContent = 'User ' + userId + ' not found';
+    document.getElementById('backBtn').style.display = 'block';
+    return;
+  }
+  renderProfile(data);
+}
+
+window.addEventListener('load', init);
+window.addEventListener('message', function(event) {
+  var data = event.data;
+  if (data && data.user_id) {
+    var url = new URL(window.location);
+    url.searchParams.set('user_id', data.user_id);
+    window.history.replaceState({}, '', url);
+    init();
+  }
+});
+</script>
+</body>
+</html>
