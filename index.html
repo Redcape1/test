@@ -542,14 +542,10 @@
 
 <script>
 // ============================================================
-// CONFIG — Update this URL to your API endpoint
+// CONFIG — Set your Cloudflare Worker URL here
 // ============================================================
-// Option A: Google Cloud Function / API endpoint
-// const API_URL = 'https://your-cloud-function-url.com/user-profile';
-
-// Option B: Static JSON on GitHub Pages (for testing)
-// Place JSON files as /data/1157746.json etc.
-const DATA_BASE_URL = '';  // leave empty for same-origin, or set full URL
+const WORKER_URL = 'https://summer-cake-3a94.emrence.workers.dev'
+// ↑ Deploy ettikten sonra buraya gerçek URL'i yaz
 
 // ============================================================
 // SAMPLE DATA — Replace with API call in production
@@ -649,26 +645,18 @@ function getUserIdFromUrl() {
 // FETCH USER DATA
 // ============================================================
 async function fetchUserData(userId) {
-  // --- OPTION A: API endpoint ---
-  // try {
-  //   const resp = await fetch(`${API_URL}?user_id=${userId}`);
-  //   if (!resp.ok) throw new Error('Not found');
-  //   return await resp.json();
-  // } catch(e) {
-  //   console.error('API error:', e);
-  //   return null;
-  // }
+  // Try Worker API first
+  try {
+    const resp = await fetch(`${WORKER_URL}?user_id=${userId}`);
+    if (resp.ok) {
+      const data = await resp.json();
+      if (!data.error) return data;
+    }
+  } catch(e) {
+    console.warn('Worker API failed, falling back to sample data:', e);
+  }
 
-  // --- OPTION B: Static JSON files on GitHub ---
-  // try {
-  //   const resp = await fetch(`${DATA_BASE_URL}/data/${userId}.json`);
-  //   if (!resp.ok) throw new Error('Not found');
-  //   return await resp.json();
-  // } catch(e) {
-  //   return null;
-  // }
-
-  // --- OPTION C: Sample data (current) ---
+  // Fallback to sample data
   return SAMPLE_DATA[userId] || null;
 }
 
