@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,9 +29,7 @@
     --platinum: #a5b4fc;
     --diamond: #67e8f9;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
     background: var(--bg-primary);
     color: var(--text-primary);
@@ -40,18 +37,11 @@
     min-height: 100vh;
     padding: 24px;
   }
-
   .profile-container { max-width: 1400px; margin: 0 auto; }
-
   .loading-screen {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 60vh;
-    flex-direction: column;
-    gap: 16px;
+    display: flex; align-items: center; justify-content: center;
+    height: 60vh; flex-direction: column; gap: 16px;
   }
-
   .loading-spinner {
     width: 48px; height: 48px;
     border: 3px solid var(--bg-section);
@@ -59,271 +49,93 @@
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
   }
-
   @keyframes spin { to { transform: rotate(360deg); } }
-
   .loading-text {
     font-family: 'Oxanium', sans-serif;
-    color: var(--text-dim);
-    font-size: 14px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    color: var(--text-dim); font-size: 14px;
+    letter-spacing: 2px; text-transform: uppercase;
   }
-
   .no-user {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 60vh;
-    flex-direction: column;
-    gap: 12px;
+    display: flex; align-items: center; justify-content: center;
+    height: 60vh; flex-direction: column; gap: 12px;
   }
-
   .no-user-icon { font-size: 48px; }
-
-  .no-user-text {
-    font-family: 'Oxanium', sans-serif;
-    color: var(--text-dim);
-    font-size: 16px;
-  }
-
-  /* === HEADER === */
+  .no-user-text { font-family: 'Oxanium', sans-serif; color: var(--text-dim); font-size: 16px; }
   .header {
     background: linear-gradient(135deg, #0f1a2e 0%, #1a1040 50%, #0f1a2e 100%);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px 32px;
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 16px;
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 24px 32px; display: flex; align-items: center;
+    gap: 28px; position: relative; overflow: hidden; margin-bottom: 16px;
   }
-
   .header::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
     background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-cyan));
   }
-
   .avatar {
-    width: 90px; height: 90px;
-    border-radius: 50%;
+    width: 90px; height: 90px; border-radius: 50%;
     background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Oxanium', sans-serif;
-    font-size: 32px;
-    font-weight: 700;
-    color: white;
-    flex-shrink: 0;
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Oxanium', sans-serif; font-size: 32px; font-weight: 700;
+    color: white; flex-shrink: 0; box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
   }
-
   .header-info { flex: 1; }
-
-  .user-name {
-    font-family: 'Oxanium', sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: white;
-    letter-spacing: 1px;
-  }
-
-  .user-id-text {
-    font-size: 14px;
-    color: var(--text-dim);
-    margin-top: 2px;
-    font-family: 'Oxanium', sans-serif;
-  }
-
-  .user-meta {
-    display: flex;
-    gap: 24px;
-    margin-top: 10px;
-  }
-
-  .meta-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 14px;
-    color: var(--text-secondary);
-  }
-
-  .meta-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    display: inline-block;
-  }
-
-  .header-badges {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    align-items: flex-end;
-  }
-
+  .user-name { font-family: 'Oxanium', sans-serif; font-size: 28px; font-weight: 700; color: white; letter-spacing: 1px; }
+  .user-id-text { font-size: 14px; color: var(--text-dim); margin-top: 2px; font-family: 'Oxanium', sans-serif; }
+  .user-meta { display: flex; gap: 24px; margin-top: 10px; }
+  .meta-item { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--text-secondary); }
+  .meta-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .header-badges { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
   .vip-badge {
     background: linear-gradient(135deg, #312e81, #4c1d95);
-    border: 1px solid var(--accent-purple);
-    padding: 6px 18px;
-    border-radius: 20px;
-    font-family: 'Oxanium', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--platinum);
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    border: 1px solid var(--accent-purple); padding: 6px 18px; border-radius: 20px;
+    font-family: 'Oxanium', sans-serif; font-size: 13px; font-weight: 600;
+    color: var(--platinum); letter-spacing: 2px; text-transform: uppercase;
   }
-
   .overall-score {
-    background: var(--bg-section);
-    border: 2px solid var(--accent-cyan);
-    border-radius: 12px;
-    padding: 8px 20px;
-    text-align: center;
+    background: var(--bg-section); border: 2px solid var(--accent-cyan);
+    border-radius: 12px; padding: 8px 20px; text-align: center;
     box-shadow: 0 0 15px rgba(6, 182, 212, 0.15);
   }
-
-  .overall-label {
-    font-size: 10px;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
-
-  .overall-value {
-    font-family: 'Oxanium', sans-serif;
-    font-size: 36px;
-    font-weight: 700;
-    color: var(--accent-cyan);
-    line-height: 1;
-  }
-
-  /* === MAIN GRID === */
-  .main-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-
-  .section {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-
+  .overall-label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
+  .overall-value { font-family: 'Oxanium', sans-serif; font-size: 36px; font-weight: 700; color: var(--accent-cyan); line-height: 1; }
+  .main-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
   .section-header {
-    background: var(--bg-section);
-    padding: 10px 16px;
-    font-family: 'Oxanium', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-bottom: 1px solid var(--border);
+    background: var(--bg-section); padding: 10px 16px;
+    font-family: 'Oxanium', sans-serif; font-size: 13px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 2px;
+    display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border);
   }
-
   .section-body { padding: 12px 16px; }
-
-  /* === STAT ROWS === */
-  .stat-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 7px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-  }
-
+  .stat-row { display: flex; align-items: center; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
   .stat-row:last-child { border-bottom: none; }
-
-  .stat-label {
-    font-size: 13px;
-    color: var(--text-secondary);
-    flex: 1;
-  }
-
-  .stat-value {
-    font-family: 'Oxanium', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    min-width: 50px;
-    text-align: right;
-  }
-
-  .stat-bar-container {
-    width: 80px; height: 6px;
-    background: var(--bg-bar);
-    border-radius: 3px;
-    margin-left: 10px;
-    overflow: hidden;
-  }
-
-  .stat-bar {
-    height: 100%;
-    border-radius: 3px;
-    transition: width 1s ease;
-  }
-
+  .stat-label { font-size: 13px; color: var(--text-secondary); flex: 1; }
+  .stat-value { font-family: 'Oxanium', sans-serif; font-size: 15px; font-weight: 600; min-width: 50px; text-align: right; }
+  .stat-bar-container { width: 80px; height: 6px; background: var(--bg-bar); border-radius: 3px; margin-left: 10px; overflow: hidden; }
+  .stat-bar { height: 100%; border-radius: 3px; transition: width 1s ease; }
   .val-elite { color: var(--accent-cyan); }
   .val-high { color: var(--accent-green); }
   .val-good { color: var(--accent-lime); }
   .val-mid { color: var(--accent-yellow); }
   .val-low { color: var(--accent-orange); }
   .val-critical { color: var(--accent-red); }
-
   .bar-elite { background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue)); }
   .bar-high { background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan)); }
   .bar-good { background: linear-gradient(90deg, var(--accent-lime), var(--accent-green)); }
   .bar-mid { background: linear-gradient(90deg, var(--accent-yellow), var(--accent-lime)); }
   .bar-low { background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow)); }
   .bar-critical { background: linear-gradient(90deg, var(--accent-red), var(--accent-orange)); }
-
-  /* === SEGMENT BADGES === */
-  .segment-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
+  .segment-grid { display: flex; flex-direction: column; gap: 8px; }
   .segment-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 12px;
-    background: var(--bg-card-alt);
-    border-radius: 8px;
-    border-left: 3px solid var(--accent-blue);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 12px; background: var(--bg-card-alt); border-radius: 8px; border-left: 3px solid var(--accent-blue);
   }
-
-  .segment-name {
-    font-size: 12px;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
+  .segment-name { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
   .badge {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 12px;
-    font-family: 'Oxanium', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-family: 'Oxanium', sans-serif; font-size: 11px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
   }
-
   .badge-platinum { background: rgba(165,180,252,0.15); color: var(--platinum); border: 1px solid rgba(165,180,252,0.3); }
   .badge-gold { background: rgba(251,191,36,0.12); color: var(--gold); border: 1px solid rgba(251,191,36,0.3); }
   .badge-black { background: rgba(255,255,255,0.08); color: #e2e8f0; border: 1px solid rgba(255,255,255,0.2); }
@@ -335,137 +147,47 @@
   .badge-warning { background: rgba(234,179,8,0.12); color: var(--accent-yellow); border: 1px solid rgba(234,179,8,0.3); }
   .badge-danger { background: rgba(239,68,68,0.12); color: var(--accent-red); border: 1px solid rgba(239,68,68,0.3); }
   .badge-none { background: rgba(100,116,139,0.1); color: var(--text-dim); border: 1px solid rgba(100,116,139,0.2); }
-
-  /* === BOTTOM ROW === */
-  .bottom-row {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-
+  .bottom-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 16px; }
   .mini-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px; text-align: center; position: relative; overflow: hidden;
   }
-
-  .mini-card::before {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 3px;
-  }
-
+  .mini-card::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; }
   .mini-card.mc-green::before { background: var(--accent-green); }
   .mini-card.mc-blue::before { background: var(--accent-blue); }
   .mini-card.mc-yellow::before { background: var(--accent-yellow); }
   .mini-card.mc-red::before { background: var(--accent-red); }
   .mini-card.mc-purple::before { background: var(--accent-purple); }
-
-  .mini-label {
-    font-size: 11px;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 6px;
-  }
-
-  .mini-value {
-    font-family: 'Oxanium', sans-serif;
-    font-size: 26px;
-    font-weight: 700;
-  }
-
-  .mini-sub {
-    font-size: 12px;
-    margin-top: 4px;
-  }
-
+  .mini-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px; }
+  .mini-value { font-family: 'Oxanium', sans-serif; font-size: 26px; font-weight: 700; }
+  .mini-sub { font-size: 12px; margin-top: 4px; }
   .trend-up { color: var(--accent-green); }
   .trend-down { color: var(--accent-red); }
   .trend-flat { color: var(--text-dim); }
-
-  /* === LIFECYCLE === */
   .lifecycle-bar {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    padding: 16px;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 0; padding: 16px;
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 16px;
   }
-
   .lc-stage {
-    flex: 1;
-    text-align: center;
-    padding: 12px 8px;
-    border-radius: 8px;
-    font-family: 'Oxanium', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-dim);
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    flex: 1; text-align: center; padding: 12px 8px; border-radius: 8px;
+    font-family: 'Oxanium', sans-serif; font-size: 13px; font-weight: 500;
+    color: var(--text-dim); letter-spacing: 1px; text-transform: uppercase;
   }
-
   .lc-stage.active {
     background: linear-gradient(135deg, rgba(6,182,212,0.15), rgba(59,130,246,0.15));
-    color: var(--accent-cyan);
-    border: 1px solid rgba(6,182,212,0.3);
+    color: var(--accent-cyan); border: 1px solid rgba(6,182,212,0.3);
   }
-
   .lc-stage.completed { color: var(--accent-green); }
-
-  .lc-arrow {
-    color: var(--text-dim);
-    font-size: 18px;
-    padding: 0 4px;
-  }
-
-  /* === RISK BANNER === */
-  .risk-banner {
-    padding: 14px 20px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 14px;
-  }
-
+  .lc-arrow { color: var(--text-dim); font-size: 18px; padding: 0 4px; }
+  .risk-banner { padding: 14px 20px; border-radius: 10px; display: flex; align-items: center; gap: 12px; font-size: 14px; }
   .risk-low { background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2); color: var(--accent-green); }
   .risk-medium { background: rgba(234,179,8,0.08); border: 1px solid rgba(234,179,8,0.2); color: var(--accent-yellow); }
   .risk-high { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); color: var(--accent-red); }
-
   .risk-icon { font-size: 22px; }
   .risk-text { flex: 1; }
-
-  .risk-label {
-    font-family: 'Oxanium', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .risk-desc {
-    font-size: 13px;
-    color: var(--text-secondary);
-    margin-top: 2px;
-  }
-
-  /* === ANIMATIONS === */
-  @keyframes fadeSlideIn {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
+  .risk-label { font-family: 'Oxanium', sans-serif; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+  .risk-desc { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+  @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
   .header { animation: fadeSlideIn 0.5s ease forwards; }
   .main-grid { animation: fadeSlideIn 0.5s ease 0.1s forwards; opacity: 0; }
   .bottom-row { animation: fadeSlideIn 0.5s ease 0.2s forwards; opacity: 0; }
@@ -474,24 +196,16 @@
 </style>
 </head>
 <body>
-
 <div class="profile-container" id="app">
-  <!-- Loading -->
   <div class="loading-screen" id="loading">
     <div class="loading-spinner"></div>
     <div class="loading-text">Loading User Profile...</div>
   </div>
-
-  <!-- No User -->
   <div class="no-user" id="no-user" style="display:none">
     <div class="no-user-icon">👤</div>
     <div class="no-user-text">Select a user from the dashboard</div>
   </div>
-
-  <!-- Profile Content -->
   <div id="profile-content" style="display:none">
-
-    <!-- HEADER -->
     <div class="header">
       <div class="avatar" id="avatar">--</div>
       <div class="header-info">
@@ -507,163 +221,47 @@
         </div>
       </div>
     </div>
-
-    <!-- MAIN 3-COL GRID -->
     <div class="main-grid">
       <div class="section">
         <div class="section-header"><span class="icon">◆</span> Segments</div>
-        <div class="section-body">
-          <div class="segment-grid" id="segmentsGrid"></div>
-        </div>
+        <div class="section-body"><div class="segment-grid" id="segmentsGrid"></div></div>
       </div>
-
       <div class="section">
         <div class="section-header"><span class="icon">▲</span> Activity</div>
         <div class="section-body" id="activityBody"></div>
       </div>
-
       <div class="section">
         <div class="section-header"><span class="icon">●</span> Financial</div>
         <div class="section-body" id="financialBody"></div>
       </div>
     </div>
-
-    <!-- BOTTOM MINI CARDS -->
     <div class="bottom-row" id="bottomRow"></div>
-
-    <!-- LIFECYCLE -->
     <div class="lifecycle-bar" id="lifecycleBar"></div>
-
-    <!-- RISK BANNER -->
     <div id="riskBanner"></div>
-
   </div>
 </div>
-
 <script>
-// ============================================================
-// CONFIG — Set your Cloudflare Worker URL here
-// ============================================================
-const WORKER_URL = 'https://summer-cake-3a94.emrence.workers.dev'
-// ↑ Deploy ettikten sonra buraya gerçek URL'i yaz
+const WORKER_URL = 'https://summer-cake-3a94.emrence.workers.dev';
 
-// ============================================================
-// SAMPLE DATA — Replace with API call in production
-// ============================================================
-const SAMPLE_DATA = {
-  "1157746": {
-    user_id: "1157746",
-    signup_date: "2024-08-15",
-    status: "Recently Active",
-    vip_level: "Platinum",
-    days_active: 120,
-    segments: {
-      loyalty: "Platinum",
-      loyalty_v2: "Black",
-      ltv: "High Value",
-      transactional: "Recently Active",
-      retention: "Loyal",
-      fee_refund: "Tier 2",
-      pnl: "Negative"
-    },
-    activity: {
-      trade_count_30d: 87,
-      trade_volume_30d: 1200000,
-      active_days_30d: 22,
-      login_inactivity: "Recently Active",
-      deposit_count: 14,
-      bonus_trades: 0,
-      avg_session_min: 45,
-      last_login_hours: 2
-    },
-    financial: {
-      total_deposits: 12450,
-      total_withdrawals: 8200,
-      net_deposit: 4250,
-      balance: 0.85,
-      first_deposit: 250,
-      pnl_all_time: -3400,
-      pnl_30d: -120,
-      ggr_contribution: 3200
-    },
-    lifecycle_stage: "retained",
-    risk_level: "medium",
-    risk_description: "Active trader but declining balance and negative PnL trajectory. Monitor for churn signals — consider targeted bonus or deposit incentive."
-  },
-  "1157786": {
-    user_id: "1157786",
-    signup_date: "2024-09-02",
-    status: "Recently Active",
-    vip_level: "Iron",
-    days_active: 85,
-    segments: {
-      loyalty: "Iron",
-      loyalty_v2: "Iron",
-      ltv: "Medium",
-      transactional: "Recently Active",
-      retention: "Active",
-      fee_refund: "None",
-      pnl: "Positive"
-    },
-    activity: {
-      trade_count_30d: 42,
-      trade_volume_30d: 380000,
-      active_days_30d: 15,
-      login_inactivity: "Recently Active",
-      deposit_count: 3,
-      bonus_trades: 0,
-      avg_session_min: 28,
-      last_login_hours: 5
-    },
-    financial: {
-      total_deposits: 2800,
-      total_withdrawals: 1200,
-      net_deposit: 1600,
-      balance: 650,
-      first_deposit: 50,
-      pnl_all_time: 420,
-      pnl_30d: 85,
-      ggr_contribution: -420
-    },
-    lifecycle_stage: "activated",
-    risk_level: "low",
-    risk_description: "Healthy engagement pattern with positive PnL. Growing deposit frequency. Good candidate for loyalty program upgrade."
-  }
-};
+const SAMPLE_DATA = {};
 
-
-// ============================================================
-// GET USER ID FROM URL
-// ============================================================
 function getUserIdFromUrl() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get('user_id');
+  return new URLSearchParams(window.location.search).get('user_id');
 }
 
-
-// ============================================================
-// FETCH USER DATA
-// ============================================================
 async function fetchUserData(userId) {
-  // Try Worker API first
   try {
-    const resp = await fetch(`${WORKER_URL}?user_id=${userId}`);
+    const resp = await fetch(WORKER_URL + '?user_id=' + userId);
     if (resp.ok) {
       const data = await resp.json();
       if (!data.error) return data;
     }
   } catch(e) {
-    console.warn('Worker API failed, falling back to sample data:', e);
+    console.warn('API failed:', e);
   }
-
-  // Fallback to sample data
   return SAMPLE_DATA[userId] || null;
 }
 
-
-// ============================================================
-// HELPERS
-// ============================================================
 function formatCurrency(val) {
   if (Math.abs(val) >= 1000000) return (val < 0 ? '-' : '') + '$' + (Math.abs(val)/1000000).toFixed(1) + 'M';
   if (Math.abs(val) >= 1000) return (val < 0 ? '-' : '') + '$' + (Math.abs(val)/1000).toFixed(1) + 'K';
@@ -681,7 +279,7 @@ function getValueClass(pct) {
 
 function getBadgeClass(value) {
   const v = (value || '').toLowerCase();
-  if (['platinum', 'high value', 'diamond'].includes(v)) return 'badge-platinum';
+  if (['platinum', 'high value', 'diamond', 'platinium'].includes(v)) return 'badge-platinum';
   if (['gold'].includes(v)) return 'badge-gold';
   if (['black'].includes(v)) return 'badge-black';
   if (['iron'].includes(v)) return 'badge-iron';
@@ -689,219 +287,108 @@ function getBadgeClass(value) {
   if (['copper', 'tier 2'].includes(v)) return 'badge-copper';
   if (['steel'].includes(v)) return 'badge-steel';
   if (['recently active', 'active', 'loyal', 'positive', 'medium'].includes(v)) return 'badge-active';
-  if (['at risk', 'declining'].includes(v)) return 'badge-warning';
-  if (['negative', 'churned', 'inactive'].includes(v)) return 'badge-danger';
+  if (['at risk', 'at-risk', 'declining', 'cooling off', 'high-risk'].includes(v)) return 'badge-warning';
+  if (['negative', 'churned', 'inactive', 'dormant'].includes(v)) return 'badge-danger';
   return 'badge-none';
 }
 
 function getBorderColor(value) {
   const cls = getBadgeClass(value);
   const map = {
-    'badge-platinum': 'var(--platinum)',
-    'badge-gold': 'var(--gold)',
-    'badge-black': '#e2e8f0',
-    'badge-iron': 'var(--text-secondary)',
-    'badge-bronze': '#f59e0b',
-    'badge-copper': 'var(--accent-orange)',
-    'badge-steel': '#94a3b8',
-    'badge-active': 'var(--accent-green)',
-    'badge-warning': 'var(--accent-yellow)',
-    'badge-danger': 'var(--accent-red)',
-    'badge-none': 'var(--text-dim)'
+    'badge-platinum': 'var(--platinum)', 'badge-gold': 'var(--gold)', 'badge-black': '#e2e8f0',
+    'badge-iron': 'var(--text-secondary)', 'badge-bronze': '#f59e0b', 'badge-copper': 'var(--accent-orange)',
+    'badge-steel': '#94a3b8', 'badge-active': 'var(--accent-green)', 'badge-warning': 'var(--accent-yellow)',
+    'badge-danger': 'var(--accent-red)', 'badge-none': 'var(--text-dim)'
   };
   return map[cls] || 'var(--accent-blue)';
 }
 
 function calcOverallScore(data) {
   let score = 50;
-  // Loyalty boost
   const loy = (data.segments.loyalty || '').toLowerCase();
-  if (loy === 'platinum' || loy === 'diamond') score += 15;
+  if (loy === 'black' || loy === 'diamond') score += 20;
+  else if (loy === 'platinum' || loy === 'platinium') score += 15;
   else if (loy === 'gold') score += 10;
+  else if (loy === 'silver') score += 7;
   else if (loy === 'bronze') score += 5;
-  // Activity boost
   if (data.activity.trade_count_30d > 50) score += 10;
   else if (data.activity.trade_count_30d > 20) score += 5;
-  // Financial
   if (data.financial.pnl_all_time < -1000) score -= 10;
-  if (data.financial.balance < 10) score -= 5;
-  if (data.financial.total_deposits > 5000) score += 8;
-  // Clamp
+  if (data.financial.pnl_all_time > 0) score += 5;
+  if (data.activity.trade_volume_30d > 1000000) score += 8;
   return Math.max(10, Math.min(99, score));
 }
 
 function statRow(label, value, pct) {
   const cls = getValueClass(pct);
-  return `
-    <div class="stat-row">
-      <span class="stat-label">${label}</span>
-      <span class="stat-value val-${cls}">${value}</span>
-      <div class="stat-bar-container"><div class="stat-bar bar-${cls}" style="width:${pct}%"></div></div>
-    </div>`;
+  return '<div class="stat-row"><span class="stat-label">' + label + '</span><span class="stat-value val-' + cls + '">' + value + '</span><div class="stat-bar-container"><div class="stat-bar bar-' + cls + '" style="width:' + pct + '%"></div></div></div>';
 }
 
 function segmentItem(name, value) {
-  return `
-    <div class="segment-item" style="border-color:${getBorderColor(value)}">
-      <span class="segment-name">${name}</span>
-      <span class="badge ${getBadgeClass(value)}">${value}</span>
-    </div>`;
+  return '<div class="segment-item" style="border-color:' + getBorderColor(value) + '"><span class="segment-name">' + name + '</span><span class="badge ' + getBadgeClass(value) + '">' + value + '</span></div>';
 }
 
-
-// ============================================================
-// RENDER PROFILE
-// ============================================================
 function renderProfile(d) {
   document.getElementById('loading').style.display = 'none';
   document.getElementById('profile-content').style.display = 'block';
-
-  const score = calcOverallScore(d);
-  const initials = ('U' + d.user_id.slice(-2)).toUpperCase();
-
-  // Header
+  var score = calcOverallScore(d);
+  var initials = ('U' + d.user_id.slice(-2)).toUpperCase();
   document.getElementById('avatar').textContent = initials;
   document.getElementById('userName').textContent = 'USER ' + d.user_id;
-  document.getElementById('userIdText').textContent = `ID: ${d.user_id} · Signup: ${d.signup_date}`;
+  document.getElementById('userIdText').textContent = 'ID: ' + d.user_id + ' · Signup: ' + d.signup_date;
   document.getElementById('vipBadge').textContent = '⬥ ' + d.vip_level;
   document.getElementById('overallScore').textContent = score;
-
-  document.getElementById('userMeta').innerHTML = `
-    <div class="meta-item"><span class="meta-dot" style="background:var(--accent-green)"></span> ${d.status}</div>
-    <div class="meta-item"><span class="meta-dot" style="background:var(--accent-purple)"></span> ${d.vip_level} VIP</div>
-    <div class="meta-item"><span class="meta-dot" style="background:var(--accent-cyan)"></span> ${d.days_active} days active</div>`;
-
-  // Segments
-  const seg = d.segments;
-  document.getElementById('segmentsGrid').innerHTML =
-    segmentItem('Loyalty', seg.loyalty) +
-    segmentItem('Loyalty v2', seg.loyalty_v2) +
-    segmentItem('LTV', seg.ltv) +
-    segmentItem('Transactional', seg.transactional) +
-    segmentItem('Retention', seg.retention) +
-    segmentItem('Fee Refund', seg.fee_refund) +
-    segmentItem('PnL', seg.pnl);
-
-  // Activity
-  const a = d.activity;
-  document.getElementById('activityBody').innerHTML =
-    statRow('Trade Count (30d)', a.trade_count_30d, Math.min(a.trade_count_30d / 1.2, 100)) +
-    statRow('Trade Volume (30d)', formatCurrency(a.trade_volume_30d), Math.min(a.trade_volume_30d / 15000, 100)) +
-    statRow('Active Days (30d)', a.active_days_30d, (a.active_days_30d / 30) * 100) +
-    statRow('Login Inactivity', a.login_inactivity, a.login_inactivity === 'Recently Active' ? 95 : 30) +
-    statRow('Deposit Count', a.deposit_count, Math.min(a.deposit_count * 5, 100)) +
-    statRow('Bonus Trades', a.bonus_trades, Math.max(a.bonus_trades * 10, 5)) +
-    statRow('Avg Session', a.avg_session_min + 'm', Math.min(a.avg_session_min / 0.6, 100)) +
-    statRow('Last Login', a.last_login_hours + 'h ago', Math.max(100 - a.last_login_hours * 4, 5));
-
-  // Financial
-  const f = d.financial;
-  const maxDep = Math.max(f.total_deposits, 1);
-  document.getElementById('financialBody').innerHTML =
-    statRow('Total Deposits', formatCurrency(f.total_deposits), Math.min(f.total_deposits / 200, 100)) +
-    statRow('Total Withdrawals', formatCurrency(f.total_withdrawals), (f.total_withdrawals / maxDep) * 80) +
-    statRow('Net Deposit', formatCurrency(f.net_deposit), Math.min(f.net_deposit / 100, 100)) +
-    statRow('Balance', formatCurrency(f.balance), Math.min(f.balance / 50, 100)) +
-    statRow('First Deposit', '$' + f.first_deposit + '+', Math.min(f.first_deposit / 5, 100)) +
-    statRow('PnL (All Time)', formatCurrency(f.pnl_all_time), f.pnl_all_time > 0 ? Math.min(f.pnl_all_time / 50, 100) : Math.max(30 + f.pnl_all_time / 200, 5)) +
-    statRow('PnL (30d)', formatCurrency(f.pnl_30d), f.pnl_30d > 0 ? Math.min(50 + f.pnl_30d / 10, 100) : Math.max(30 + f.pnl_30d / 50, 5)) +
-    statRow('GGR Contribution', formatCurrency(f.ggr_contribution), f.ggr_contribution > 0 ? Math.min(f.ggr_contribution / 60, 100) : 10);
-
-  // Bottom cards
-  const depTrend = f.net_deposit > 0 ? 'trend-up' : 'trend-down';
-  document.getElementById('bottomRow').innerHTML = `
-    <div class="mini-card mc-green">
-      <div class="mini-label">Deposits</div>
-      <div class="mini-value" style="color:var(--accent-green)">${formatCurrency(f.total_deposits)}</div>
-      <div class="mini-sub ${depTrend}">${f.net_deposit > 0 ? '▲' : '▼'} net ${formatCurrency(f.net_deposit)}</div>
-    </div>
-    <div class="mini-card mc-blue">
-      <div class="mini-label">Volume (30d)</div>
-      <div class="mini-value" style="color:var(--accent-blue)">${formatCurrency(a.trade_volume_30d)}</div>
-      <div class="mini-sub trend-flat">${a.trade_count_30d} trades</div>
-    </div>
-    <div class="mini-card mc-yellow">
-      <div class="mini-label">Balance</div>
-      <div class="mini-value" style="color:var(--accent-yellow)">${formatCurrency(f.balance)}</div>
-      <div class="mini-sub ${f.balance < 10 ? 'trend-down' : 'trend-up'}">${f.balance < 10 ? '▼ low balance' : '▲ healthy'}</div>
-    </div>
-    <div class="mini-card mc-red">
-      <div class="mini-label">PnL</div>
-      <div class="mini-value" style="color:${f.pnl_all_time >= 0 ? 'var(--accent-green)' : 'var(--accent-red)'}">${formatCurrency(f.pnl_all_time)}</div>
-      <div class="mini-sub ${f.pnl_30d >= 0 ? 'trend-up' : 'trend-down'}">${f.pnl_30d >= 0 ? '▲' : '▼'} ${formatCurrency(f.pnl_30d)} (30d)</div>
-    </div>
-    <div class="mini-card mc-purple">
-      <div class="mini-label">LTV Segment</div>
-      <div class="mini-value" style="color:var(--accent-purple)">${seg.ltv}</div>
-      <div class="mini-sub trend-flat">— ${seg.loyalty}</div>
-    </div>`;
-
-  // Lifecycle
-  const stages = ['acquired', 'activated', 'retained', 'at_risk', 'churned'];
-  const stageLabels = { acquired: 'Acquired', activated: 'Activated', retained: 'Retained', at_risk: 'At Risk', churned: 'Churned' };
-  const currentIdx = stages.indexOf(d.lifecycle_stage);
-  let lcHTML = '';
-  stages.forEach((s, i) => {
+  document.getElementById('userMeta').innerHTML = '<div class="meta-item"><span class="meta-dot" style="background:var(--accent-green)"></span> ' + d.status + '</div><div class="meta-item"><span class="meta-dot" style="background:var(--accent-purple)"></span> ' + d.vip_level + '</div><div class="meta-item"><span class="meta-dot" style="background:var(--accent-cyan)"></span> ' + d.days_active + ' days active</div>';
+  var seg = d.segments;
+  document.getElementById('segmentsGrid').innerHTML = segmentItem('Loyalty', seg.loyalty) + segmentItem('Loyalty v2', seg.loyalty_v2) + segmentItem('LTV', seg.ltv) + segmentItem('Transactional', seg.transactional) + segmentItem('Retention', seg.retention) + segmentItem('Fee Refund', seg.fee_refund) + segmentItem('PnL', seg.pnl);
+  var a = d.activity;
+  document.getElementById('activityBody').innerHTML = statRow('Trade Count', a.trade_count_30d, Math.min(a.trade_count_30d / 1.2, 100)) + statRow('Trade Volume', formatCurrency(a.trade_volume_30d), Math.min(a.trade_volume_30d / 15000, 100)) + statRow('Login Inactivity', a.login_inactivity, a.login_inactivity === 'Recently Active' ? 95 : 30) + statRow('Deposit Count', a.deposit_count, Math.min(a.deposit_count * 5, 100)) + statRow('Bonus Trades', a.bonus_trades, Math.max(a.bonus_trades * 10, 5)) + statRow('Last Login', a.last_login_hours + 'h ago', Math.max(100 - a.last_login_hours * 4, 5));
+  var f = d.financial;
+  document.getElementById('financialBody').innerHTML = statRow('First Deposit', '$' + f.first_deposit, Math.min(f.first_deposit / 5, 100)) + statRow('PnL (All Time)', formatCurrency(f.pnl_all_time), f.pnl_all_time > 0 ? Math.min(f.pnl_all_time / 50, 100) : Math.max(30 + f.pnl_all_time / 200, 5)) + statRow('GGR Contribution', formatCurrency(f.ggr_contribution), f.ggr_contribution > 0 ? Math.min(f.ggr_contribution / 60, 100) : 10);
+  document.getElementById('bottomRow').innerHTML = '<div class="mini-card mc-blue"><div class="mini-label">Volume</div><div class="mini-value" style="color:var(--accent-blue)">' + formatCurrency(a.trade_volume_30d) + '</div><div class="mini-sub trend-flat">' + a.trade_count_30d + ' trades</div></div><div class="mini-card mc-green"><div class="mini-label">PnL</div><div class="mini-value" style="color:' + (f.pnl_all_time >= 0 ? 'var(--accent-green)' : 'var(--accent-red)') + '">' + formatCurrency(f.pnl_all_time) + '</div><div class="mini-sub trend-flat">all time</div></div><div class="mini-card mc-purple"><div class="mini-label">Loyalty</div><div class="mini-value" style="color:var(--accent-purple)">' + seg.loyalty + '</div><div class="mini-sub trend-flat">' + seg.loyalty_v2 + ' v2</div></div><div class="mini-card mc-yellow"><div class="mini-label">LTV</div><div class="mini-value" style="color:var(--accent-yellow)">' + seg.ltv + '</div><div class="mini-sub trend-flat">segment</div></div><div class="mini-card mc-red"><div class="mini-label">Status</div><div class="mini-value" style="color:var(--accent-cyan)">' + d.status + '</div><div class="mini-sub trend-flat">login activity</div></div>';
+  var stages = ['acquired', 'activated', 'retained', 'at_risk', 'churned'];
+  var stageLabels = { acquired: 'Acquired', activated: 'Activated', retained: 'Retained', at_risk: 'At Risk', churned: 'Churned' };
+  var currentIdx = stages.indexOf(d.lifecycle_stage);
+  var lcHTML = '';
+  stages.forEach(function(s, i) {
     if (i > 0) lcHTML += '<div class="lc-arrow">→</div>';
-    const cls = i < currentIdx ? 'completed' : (i === currentIdx ? 'active' : '');
-    const prefix = i < currentIdx ? '✓ ' : (i === currentIdx ? '◈ ' : '');
-    lcHTML += `<div class="lc-stage ${cls}">${prefix}${stageLabels[s]}</div>`;
+    var cls = i < currentIdx ? 'completed' : (i === currentIdx ? 'active' : '');
+    var prefix = i < currentIdx ? '✓ ' : (i === currentIdx ? '◈ ' : '');
+    lcHTML += '<div class="lc-stage ' + cls + '">' + prefix + stageLabels[s] + '</div>';
   });
   document.getElementById('lifecycleBar').innerHTML = lcHTML;
-
-  // Risk banner
-  const riskIcons = { low: '✅', medium: '⚠', high: '🔴' };
-  const riskLabels = { low: 'Low Risk', medium: 'Medium Risk', high: 'High Risk' };
-  document.getElementById('riskBanner').innerHTML = `
-    <div class="risk-banner risk-${d.risk_level}">
-      <div class="risk-icon">${riskIcons[d.risk_level]}</div>
-      <div class="risk-text">
-        <div class="risk-label">${riskLabels[d.risk_level]}</div>
-        <div class="risk-desc">${d.risk_description}</div>
-      </div>
-    </div>`;
+  var riskIcons = { low: '✅', medium: '⚠', high: '🔴' };
+  var riskLabels = { low: 'Low Risk', medium: 'Medium Risk', high: 'High Risk' };
+  document.getElementById('riskBanner').innerHTML = '<div class="risk-banner risk-' + d.risk_level + '"><div class="risk-icon">' + riskIcons[d.risk_level] + '</div><div class="risk-text"><div class="risk-label">' + riskLabels[d.risk_level] + '</div><div class="risk-desc">' + d.risk_description + '</div></div></div>';
 }
 
-
-// ============================================================
-// INIT
-// ============================================================
 async function init() {
-  const userId = getUserIdFromUrl();
-
+  var userId = getUserIdFromUrl();
   if (!userId) {
     document.getElementById('loading').style.display = 'none';
     document.getElementById('no-user').style.display = 'flex';
     return;
   }
-
-  const data = await fetchUserData(userId);
-
+  var data = await fetchUserData(userId);
   if (!data) {
     document.getElementById('loading').style.display = 'none';
     document.getElementById('no-user').style.display = 'flex';
-    document.querySelector('.no-user-text').textContent = `User ${userId} not found`;
+    document.querySelector('.no-user-text').textContent = 'User ' + userId + ' not found';
     return;
   }
-
   renderProfile(data);
 }
 
-// Listen for URL changes (Omni might update iframe src)
 window.addEventListener('load', init);
-window.addEventListener('hashchange', init);
-
-// Also listen for messages from parent (Omni dashboard)
 window.addEventListener('message', function(event) {
-  const data = event.data;
+  var data = event.data;
   if (data && data.user_id) {
-    const url = new URL(window.location);
+    var url = new URL(window.location);
     url.searchParams.set('user_id', data.user_id);
     window.history.replaceState({}, '', url);
     init();
   }
 });
 </script>
-
 </body>
 </html>
